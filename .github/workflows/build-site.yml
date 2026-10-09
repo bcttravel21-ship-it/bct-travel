@@ -1,0 +1,31 @@
+name: Ndërto faqen
+
+# Sa herë që ndryshon kodi te src/, faqja te site/ rindërtohet vetë.
+# Kështu ndryshimet bëhen vetëm te src/ (edhe nga GitHub në shfletues), dhe Cloudflare Pages publikon site/.
+on:
+  push:
+    branches: [main]
+    paths: ['src/**']
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-site
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ndërto site/ nga src/
+        run: python3 src/build.py
+      - name: Ruaj faqen e re
+        run: |
+          git config user.name "bct-build"
+          git config user.email "bct-build@users.noreply.github.com"
+          git add site
+          git diff --cached --quiet || git commit -m "Faqja u rindërtua nga src/"
+          git push

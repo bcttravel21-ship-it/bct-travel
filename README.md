@@ -14,6 +14,7 @@ Faqja e agjencisë BCT Travel, me:
 | `src/` | Kodi burimor i faqes dhe i panelit. Pas çdo ndryshimi nisni `python3 src/build.py`, që përditëson `site/`. |
 | `service-24-7/` | Shërbimi në Cloudflare (Worker). Ruan çmimet, ndryshimet e panelit dhe fotot, dhe bën kërkimin "Gjej fluturimet". |
 | `flytik-bot/` | Boti që hyn në Flytik me user dhe password. Punon vetë në GitHub Actions. |
+| `.github/workflows/build-site.yml` | Rindërton `site/` vetë sa herë që ndryshon diçka te `src/`. |
 | `.github/workflows/flytik.yml` | Orari i botit: çdo 3 orë. Niset vetëm kur `FLYTIK_ENABLED = true`. |
 
 ## Radha e ngritjes
