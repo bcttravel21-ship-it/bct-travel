@@ -1,0 +1,20 @@
+# Vetëm nëse e vendosni Worker-in me komandë (npx wrangler deploy).
+# Nëse e bëni nga paneli i Cloudflare, ky skedar nuk ju duhet.
+name = "bct-flights"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+
+[triggers]
+crons = ["0 * * * *"]          # çdo orë
+
+[[kv_namespaces]]
+binding = "PRICES"
+id = "VENDOSNI_KETU_ID_E_KV"   # npx wrangler kv namespace create PRICES
+
+[vars]
+ALLOWED_ORIGINS = "https://bct-travel.com,https://www.bct-travel.com"
+BATCH = "3"
+DAYS_AHEAD = "10,24"
+MAX_CONNECTIONS = "0"
+
+# Token-i vendoset si secret, jo këtu:  npx wrangler secret put DUFFEL_TOKEN

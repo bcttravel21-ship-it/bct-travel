@@ -1,0 +1,70 @@
+name: Boti Flytik
+
+on:
+  schedule:
+    - cron: '15 */3 * * *'     # çdo 3 orë, ditë e natë (në minutën 15)
+  workflow_dispatch:
+    inputs:
+      debug:
+        description: 'Ruaj foto dhe HTML të çdo hapi (diagnostikim)'
+        type: boolean
+        default: false
+      only:
+        description: 'Vetëm këto kode, p.sh. BSL,ZRH (bosh = të gjitha)'
+        type: string
+        default: ''
+
+concurrency:
+  group: flytik-bot
+  cancel-in-progress: false
+
+jobs:
+  cmimet:
+    # Boti niset vetëm pasi të vendosni variablin FLYTIK_ENABLED = true (shih flytik-bot/README.md)
+    if: vars.FLYTIK_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    defaults:
+      run:
+        working-directory: flytik-bot
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Cache e shfletuesit
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: pw-${{ runner.os }}-${{ hashFiles('flytik-bot/package.json') }}
+
+      - name: Instalo Playwright
+        run: |
+          npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium
+
+      - name: Hyr në Flytik dhe merr çmimet
+        env:
+          FLYTIK_USER: ${{ secrets.FLYTIK_USER }}
+          FLYTIK_PASS: ${{ secrets.FLYTIK_PASS }}
+          INGEST_KEY: ${{ secrets.INGEST_KEY }}
+          WORKER_URL: ${{ vars.WORKER_URL }}
+          FLYTIK_URL: ${{ vars.FLYTIK_URL }}
+          SEARCH_URL: ${{ vars.SEARCH_URL }}
+          MARKUP_PERCENT: ${{ vars.MARKUP_PERCENT }}
+          MARKUP_FIXED: ${{ vars.MARKUP_FIXED }}
+          WINDOWS: ${{ vars.WINDOWS }}
+          DEBUG: ${{ inputs.debug && '1' || '' }}
+          ONLY_ROUTES: ${{ inputs.only }}
+        run: node bot.mjs
+
+      - name: Ruaj diagnostikimin
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: diagnostikim
+          path: flytik-bot/debug/
+          if-no-files-found: ignore
+          retention-days: 3

@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="sq" data-mode="b2c">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BCT Travel – Bota, nga Prishtina</title>
+<meta name="description" content="Agjenci udhëtimi nga Kosova. Bileta avioni nga Prishtina për 33 qytete në Evropë dhe paketa pushimi për Maldive, Zanzibar me safari, Dubai, Antalya, Bodrum dhe destinacione të rralla. Portal B2B për agjencitë partnere.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="{{FAVICON}}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+{{CSS}}
+</style>
+</head>
+<body>
+<a class="skip" href="#ofertat">Kalo te ofertat</a>
+
+<header class="gnav" id="top">
+  <div class="container gnav__in">
+    <a class="gnav__brand" href="#top" aria-label="BCT Travel, kreu"><img src="{{LOGO_WHITE}}" alt="BCT Travel" width="380" height="72"></a>
+    <nav class="gnav__links" aria-label="Navigimi kryesor">
+      <a href="#ofertat">Ofertat</a>
+      <a href="#fluturime">Fluturime</a>
+      <a href="#te-rralla">Të rralla</a>
+      <a href="#b2b">Për agjencitë</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <div class="gnav__actions">
+      <div class="seg-mini" role="group" aria-label="Profili">
+        <button type="button" data-mode-btn="b2c" aria-pressed="true">Udhëtarë</button>
+        <button type="button" data-mode-btn="b2b" aria-pressed="false">B2B</button>
+      </div>
+      <button type="button" class="nav-icon" data-fav-filter aria-label="Ofertat e ruajtura"><i data-i="heart"></i><span class="badge" data-fav-count></span></button>
+      <a class="pill pill--red pill--sm gnav__cta" href="#nderto">Rezervo</a>
+      <button type="button" class="nav-icon menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mnav" aria-label="Menyja"><i data-i="menu"></i></button>
+    </div>
+  </div>
+  <div class="partner-bar b2b-only">
+    <div class="container partner-bar__in">
+      <p>Portali B2B: <strong data-partner-name></strong>. Çmimet tregohen NET, me komisionin tuaj.</p>
+      <div class="partner-bar__actions">
+        <button type="button" class="pill pill--white pill--sm" data-open-dash>Paneli</button>
+        <button type="button" class="pill pill--glass pill--sm" data-logout>Dil</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="mnav" id="mnav" hidden>
+  <button type="button" class="nav-icon mnav__close" data-menu-close aria-label="Mbyll menynë"><i data-i="x"></i></button>
+  <a href="#ofertat">Ofertat</a>
+  <a href="#fluturime">Fluturime</a>
+  <a href="#te-rralla">Të rralla</a>
+  <a href="#b2b">Për agjencitë</a>
+  <a href="#kontakt">Kontakt</a>
+  <div class="mnav__foot">
+    <div class="seg-mini" role="group" aria-label="Profili">
+      <button type="button" data-mode-btn="b2c" aria-pressed="true">Udhëtarë</button>
+      <button type="button" data-mode-btn="b2b" aria-pressed="false">Agjenci B2B</button>
+    </div>
+    <a class="pill pill--red pill--block" href="#nderto">Rezervo udhëtimin</a>
+  </div>
+</div>
+
+<main id="main">
+  <section class="stage" id="stage" aria-label="Destinacionet në glob">
+    <div class="stage__sticky">
+      <canvas id="globe" aria-hidden="true"></canvas>
+      <div class="stage__labels" id="globeLabels" aria-hidden="true"></div>
+      <div class="stage__panels" id="panels">
+        <div class="panel panel--hero" data-phase="0">
+          <p class="hero__eyebrow grad">BCT Travel</p>
+          <h1 class="hero__title">Bota,<br>nga Prishtina.</h1>
+          <p class="hero__sub">Maldive, Zanzibar, Dubai, Antalya, Bodrum. Dhe bileta avioni për <span data-fl-count>33</span> qytete në Evropë.</p>
+          <div class="hero__cta">
+            <a class="pill pill--white" href="#ofertat">Shiko ofertat</a>
+            <a class="chev" href="#fluturime">Bileta avioni <i data-i="chevron"></i></a>
+          </div>
+        </div>
+      </div>
+      <nav class="stage__rail" id="rail" aria-label="Kapitujt"></nav>
+      <p class="stage__cue" id="cue"><span>Lëvizni poshtë</span><i data-i="down"></i></p>
+      <p class="stage__hint" id="dragHint">Tërhiqni globin për ta rrotulluar</p>
+    </div>
+  </section>
+
+  <section class="sec sec--alt" id="ofertat" aria-labelledby="offersTitle">
+    <div class="container">
+      <header class="sec__head sec__head--center">
+        <h2 id="offersTitle">Ofertat e sezonit.</h2>
+        <p>Fluturim, transfer dhe hotel në çdo paketë: nga Prishtina, ose nga Tirana dhe Shkupi për Maldivet dhe Japoninë. Zgjidhni një ofertë dhe personalizojeni deri në detaj.</p>
+      </header>
+      <div class="filterbar">
+        <div class="chips" id="catChips" role="group" aria-label="Kategoria"></div>
+        <button type="button" class="chip chip--fav" id="fFav" aria-pressed="false"><i data-i="heart"></i>Të ruajtura</button>
+      </div>
+      <div class="bento" id="bento"></div>
+      <div class="bento-more"><button type="button" class="pill pill--soft" id="bentoMore" hidden></button></div>
+    </div>
+  </section>
+
+  <section class="sec" id="nderto" aria-labelledby="cfgTitle">
+    <div class="container">
+      <header class="sec__head">
+        <h2 id="cfgTitle">Ndërto udhëtimin tënd.</h2>
+        <p>Zgjidhni ofertën, datën, hotelin dhe udhëtarët. Çmimi llogaritet në çast, pa pritur ofertë me email.</p>
+      </header>
+      <div class="cfg">
+        <div class="cfg__steps" id="cfgSteps"></div>
+        <aside class="cfg__aside" aria-label="Përmbledhja e udhëtimit"><div class="cfg__sticky" id="cfgSummary"></div></aside>
+      </div>
+      <div class="cfg-bar" id="cfgBar"></div>
+    </div>
+  </section>
+
+  <section class="sec sec--alt" id="fluturime" aria-labelledby="flTitle">
+    <div class="container">
+      <header class="sec__head sec__head--center">
+        <p class="eyebrow grad">Bileta avioni</p>
+        <h2 id="flTitle">Fluturime nga Prishtina.</h2>
+        <p><span data-fl-count>33</span> qytete në Evropë, për familjen, punën dhe fundjavat. Zgjidhni datën dhe ne ju dërgojmë fluturimet e lira me çmimin e ditës.</p>
+      </header>
+      <form class="flight-card" id="flightForm" novalidate>
+        <div class="flight-card__top">
+          <div class="seg" role="group" aria-label="Lloji i udhëtimit">
+            <button type="button" data-trip="rt" aria-pressed="true">Vajtje-ardhje</button>
+            <button type="button" data-trip="ow" aria-pressed="false">Vetëm vajtje</button>
+          </div>
+        </div>
+        <div class="fl-row1">
+          <div class="field fl-from"><span id="flFromLabel">Nga</span><div class="fl-static">Prishtinë <b>PRN</b></div></div>
+          <button type="button" class="fl-swap" id="flSwap" aria-pressed="false" aria-label="Ndërro drejtimin e fluturimit"><i data-i="swap"></i></button>
+          <label class="field fl-to"><span id="flToLabel">Për</span><span class="select"><select name="dest" id="flDest" required></select></span></label>
+          <label class="field fl-dep"><span>Nisja</span><input class="input" type="date" name="dep" id="flDep" required></label>
+          <label class="field fl-ret" id="flRetWrap"><span>Kthimi</span><input class="input" type="date" name="ret" id="flRet"></label>
+        </div>
+        <div class="fl-row2">
+          <label class="field"><span>Të rritur</span><span class="select"><select name="adults" id="flAdults"></select></span></label>
+          <label class="field"><span>Fëmijë (2–11)</span><span class="select"><select name="children" id="flChildren"></select></span></label>
+          <label class="field"><span>Foshnja (0–2)</span><span class="select"><select name="infants" id="flInfants"></select></span></label>
+          <label class="field"><span>Bagazhi</span><span class="select"><select name="bags"><option>Vetëm çanta e dorës</option><option>Me valixhe</option></select></span></label>
+        </div>
+        <p class="fl-price" id="flPrice" aria-live="polite" hidden></p>
+        <div class="form-actions">
+          <button class="pill pill--red" type="submit" name="via" value="live" id="flLiveBtn" hidden><i data-i="search"></i>Gjej fluturimet</button>
+          <button class="pill pill--wa" type="submit" name="via" value="wa"><i data-i="whatsapp"></i><span id="flWaLabel">Kërko çmimin në WhatsApp</span></button>
+          <button class="pill pill--soft" type="submit" name="via" value="mail"><i data-i="mail"></i>Me email</button>
+          <p class="form-note">Çmimet e biletave ndryshojnë çdo ditë. Ju dërgojmë fluturimet e lira dhe çmimin e ditës për datat tuaja.</p>
+        </div>
+        <div class="fl-results" id="flResults" aria-live="polite" hidden></div>
+      </form>
+      <div class="routes" id="flRoutes"></div>
+    </div>
+  </section>
+
+  <section class="sec sec--black" id="te-rralla" aria-labelledby="rareTitle">
+    <div class="container">
+      <header class="sec__head">
+        <h2 id="rareTitle">Koleksioni <span class="grad">i rrallë.</span></h2>
+        <p>Udhëtime për ata që kanë parë shumë: grupe deri në 12 veta dhe pak data në vit.</p>
+      </header>
+    </div>
+    <div class="carousel" id="rareTrack" tabindex="0" aria-label="Udhëtimet e rralla"></div>
+    <div class="container carousel__nav">
+      <button type="button" class="round" data-car="-1" aria-label="Më parë"><i data-i="left"></i></button>
+      <button type="button" class="round" data-car="1" aria-label="Më pas"><i data-i="chevron"></i></button>
+    </div>
+  </section>
+
+  <section class="sec sec--dark dark" id="b2b" aria-labelledby="b2bTitle">
+    <div class="container">
+      <header class="sec__head sec__head--center">
+        <p class="eyebrow grad">BCT Partner</p>
+        <h2 id="b2bTitle">Shitni botën.<br>Me emrin tuaj.</h2>
+        <p>Portali B2B për agjencitë: çmime NET, komision i qartë dhe oferta pa logon tonë, gati për t’ua dërguar klientëve në WhatsApp.</p>
+        <div class="b2b-cta">
+          <button type="button" class="pill pill--white b2c-only" data-login>Hyr në portal</button>
+          <button type="button" class="pill pill--white b2b-only" data-open-dash>Hap panelin</button>
+          <button type="button" class="chev" data-partner-apply>Apliko si partner <i data-i="chevron"></i></button>
+        </div>
+      </header>
+      <div class="device-wrap">
+        <div class="device" id="device">
+          <div class="device__bar" aria-hidden="true"><i></i><i></i><i></i><span class="device__url">partner.bct-travel.com</span></div>
+          <div class="device__body">
+            <div class="device__side" aria-hidden="true"><span class="on">Përmbledhje</span><span>Çmimet NET</span><span>Kërkesat</span><span>Oferta për klientët</span><span>Markup</span></div>
+            <div class="device__main">
+              <div class="device__kpis" id="deviceKpis"></div>
+              <table class="dtable">
+                <thead><tr><th scope="col">Oferta</th><th scope="col" class="num">Publik</th><th scope="col" class="num">NET</th><th scope="col" class="num">Komisioni</th></tr></thead>
+                <tbody id="deviceRows"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="features">
+        <div class="feature"><i data-i="percent"></i><h3>Çmime NET dhe komision</h3><p>Për çdo paketë shihni çmimin NET, komisionin tuaj dhe çmimin publik.</p></div>
+        <div class="feature"><i data-i="file"></i><h3>Oferta me emrin tuaj</h3><p>Krijoni ofertë pa logon tonë, me markup-un tuaj, në pak sekonda.</p></div>
+        <div class="feature"><i data-i="users"></i><h3>Vende në nisjet grupore</h3><p>Shihni vendet e lira para se t’ua ofroni klientëve.</p></div>
+        <div class="feature"><i data-i="headset"></i><h3>Një person kontakti</h3><p>Rezervimet dhe ndryshimet i ndjek një menaxher partneriteti.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--alt" id="pse" aria-labelledby="whyTitle">
+    <div class="container">
+      <header class="sec__head sec__head--center">
+        <h2 id="whyTitle">Pse BCT Travel.</h2>
+        <p>Agjenci udhëtimi nga Kosova, aktive që nga viti 2021. Paketat i organizojmë vetë dhe punojmë me tour operatorë të përzgjedhur.</p>
+      </header>
+      <div class="why">
+        <div class="why__card"><i data-i="plane"></i><h3>Nisje nga Prishtina, Tirana dhe Shkupi</h3><p>Charter direkt për Turqinë, bileta për 33 qytete në Evropë, dhe për Maldivet e Japoninë nisje nga Tirana ose Shkupi.</p></div>
+        <div class="why__card"><i data-i="tag"></i><h3>Çmim i qartë që në fillim</h3><p>Shihni çfarë përfshihet, çfarë jo, dhe sa kushton çdo ndryshim.</p></div>
+        <div class="why__card"><i data-i="headset"></i><h3>Një kontakt për gjithçka</h3><p>Një agjent që e njeh rezervimin tuaj, nga dita e parë deri në kthim.</p></div>
+        <div class="why__card"><i data-i="compass"></i><h3>Programe sipas jush</h3><p>Data, hoteli dhe aktivitetet ndryshojnë sipas dëshirës, sidomos për muaj mjalti.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="pyetje" aria-labelledby="faqTitle">
+    <div class="container">
+      <header class="sec__head sec__head--center"><h2 id="faqTitle">Pyetje të shpeshta.</h2></header>
+      <div class="faq">
+        <details><summary>Çfarë përfshihet zakonisht në një paketë?</summary><p>Fluturimi kthyes (nga Prishtina, ose nga Tirana dhe Shkupi për Maldivet dhe Japoninë), transferet aeroport – hotel – aeroport, akomodimi me pensionin e zgjedhur dhe asistenca jonë. Te secila ofertë shihni saktësisht çfarë përfshihet dhe çfarë jo.</p></details>
+        <details><summary>Si rezervoj?</summary><p>Zgjidhni ofertën te “Ndërto udhëtimin”, caktoni datën, hotelin dhe udhëtarët, pastaj dërgoni kërkesën me WhatsApp ose me email. Ne ju konfirmojmë disponueshmërinë dhe çmimin përfundimtar.</p></details>
+        <details><summary>A mund ta ndryshoj programin?</summary><p>Po. Data, hoteli, kohëzgjatja dhe aktivitetet mund të ndryshojnë. Për muaj mjalti dhe udhëtime private e ndërtojmë programin sipas jush.</p></details>
+        <details><summary>Si paguhet?</summary><p>Rezervimi konfirmohet me një paradhënie dhe pjesa tjetër paguhet para nisjes. Kushtet e sakta për secilën ofertë jua japim me shkrim para pagesës.</p></details>
+        <details><summary>A më ndihmoni me vizën?</summary><p>Po. Për çdo destinacion ju tregojmë nëse duhet vizë dhe ju ndihmojmë me dokumentet aty ku kërkohet.</p></details>
+        <details><summary>Jam agjenci. Si bëhem partner?</summary><p>Plotësoni aplikimin për partnerë. Pasi verifikojmë të dhënat e biznesit, merrni qasje në portal me çmime NET, komisione dhe oferta pa logo.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--alt" id="kontakt" aria-labelledby="contactTitle">
+    <div class="container contact">
+      <div>
+        <header class="sec__head">
+          <h2 id="contactTitle">Le ta planifikojmë bashkë.</h2>
+          <p>Na tregoni ku dëshironi të shkoni, kur dhe me sa veta. Ne kthehemi me ofertën dhe disponueshmërinë.</p>
+        </header>
+        <ul class="contact-list">
+          <li><a data-wa-link href="#"><i data-i="whatsapp"></i><span>WhatsApp <span data-phone></span></span></a></li>
+          <li><a data-tel href="#"><i data-i="phone"></i><span data-phone></span></a></li>
+          <li><a data-mail href="#"><i data-i="mail"></i><span data-email></span></a></li>
+          <li><span><i data-i="pin"></i><span data-address></span></span></li>
+        </ul>
+      </div>
+      <div class="form-card" id="contactCard">
+        <form id="contactForm" novalidate>
+          <div class="form-grid">
+            <label class="field"><span>Emri dhe mbiemri</span><input class="input" name="name" autocomplete="name" required></label>
+            <label class="field"><span>Telefoni ose WhatsApp</span><input class="input" name="phone" type="tel" autocomplete="tel" inputmode="tel" required></label>
+            <label class="field full"><span>Email (opsional)</span><input class="input" name="email" type="email" autocomplete="email"></label>
+            <label class="field"><span>Destinacioni</span><span class="select"><select name="dest" id="cDest"></select></span></label>
+            <label class="field"><span>Muaji i nisjes</span><span class="select"><select name="month" id="cMonth"></select></span></label>
+            <label class="field"><span>Të rritur</span><span class="select"><select name="adults" id="cAdults"></select></span></label>
+            <label class="field"><span>Fëmijë</span><span class="select"><select name="children" id="cChildren"></select></span></label>
+            <label class="field full"><span>Mesazhi</span><textarea class="textarea" name="msg" placeholder="P.sh. muaj mjalti në shkurt, rreth 5.000 € për dy veta"></textarea></label>
+          </div>
+          <div class="form-actions">
+            <button class="pill pill--wa" type="submit" name="via" value="wa"><i data-i="whatsapp"></i>Dërgo me WhatsApp</button>
+            <button class="pill pill--soft" type="submit" name="via" value="mail"><i data-i="mail"></i>Dërgo me email</button>
+            <p class="form-note">Kërkesa hapet në WhatsApp ose në email-in tuaj, gati për ta dërguar.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <p class="footer__note">Çmimet e paketave janë për person në dhomë dyshe dhe konfirmohen sipas disponueshmërisë në momentin e rezervimit. Për Maldivet dhe Japoninë nisja është nga Tirana ose Shkupi, sipas kompanisë ajrore. Biletat e avionit ofrohen me çmimin e ditës. Ofertat e koleksionit të rrallë kanë vende të kufizuara.</p>
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <img class="logo--color" src="{{LOGO}}" alt="BCT Travel" width="380" height="72">
+        <img class="logo--white" src="{{LOGO_WHITE}}" alt="" aria-hidden="true" width="380" height="72">
+        <p>Agjenci udhëtimi nga Kosova, që nga viti 2021.</p>
+      </div>
+      <div><h4>Ofertat</h4><ul>
+        <li><a href="#fluturime">Bileta avioni</a></li>
+        <li><button type="button" class="linklike" data-goto-cat="beach">Plazh</button></li>
+        <li><button type="button" class="linklike" data-goto-cat="safari">Safari</button></li>
+        <li><button type="button" class="linklike" data-goto-cat="honeymoon">Muaj mjalti</button></li>
+        <li><button type="button" class="linklike" data-goto-cat="earlybooking">Early Booking</button></li>
+      </ul></div>
+      <div><h4>Kompania</h4><ul>
+        <li><a href="#pse">Pse BCT Travel</a></li>
+        <li><a href="#b2b">Për agjencitë</a></li>
+        <li><a href="#pyetje">Pyetje të shpeshta</a></li>
+      </ul></div>
+      <div><h4>Kontakt</h4><ul>
+        <li><a data-wa-link href="#">WhatsApp</a></li>
+        <li><a data-tel href="#"><span data-phone></span></a></li>
+        <li><a data-mail href="#"><span data-email></span></a></li>
+      </ul></div>
+    </div>
+    <div class="footer__bottom"><span>© <span id="year"></span> BCT Travel. Të gjitha të drejtat e rezervuara.</span><span data-address></span></div>
+  </div>
+</footer>
+
+<a class="wa-fab" data-wa-link href="#" aria-label="Na shkruani në WhatsApp"><i data-i="whatsapp"></i></a>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<dialog class="dlg dlg--sheet" id="offerDlg" aria-labelledby="sheetTitle">
+  <button class="dlg__close" type="button" data-close aria-label="Mbyll"><i data-i="x"></i></button>
+  <div class="sheet">
+    <div class="sheet__scroll" id="sheetScroll">
+      <div class="sheet__hero mood" id="sheetHero"></div>
+      <div class="sheet__body" id="sheetBody"></div>
+    </div>
+    <div class="sheet__foot" id="sheetFoot"></div>
+  </div>
+</dialog>
+
+<dialog class="dlg dlg--sm" id="loginDlg" aria-labelledby="loginTitle">
+  <div class="dlg__body">
+    <button class="dlg__close dlg__close--plain" type="button" data-close aria-label="Mbyll"><i data-i="x"></i></button>
+    <h2 id="loginTitle">Hyni në BCT Partner.</h2>
+    <p>Çmime NET, komisione dhe oferta me emrin e agjencisë suaj.</p>
+    <form class="dlg__form" id="loginForm" novalidate>
+      <label class="field"><span>Email-i i agjencisë</span><input class="input" name="email" type="email" autocomplete="username" required></label>
+      <label class="field"><span>Fjalëkalimi</span><input class="input" name="pass" type="password" autocomplete="current-password" required></label>
+      <p class="err" id="loginErr" hidden></p>
+      <button class="pill pill--red pill--block" type="submit">Hyr</button>
+      <div class="or">ose</div>
+      <button class="pill pill--soft pill--block" type="button" id="demoLogin">Provo portalin me llogari demo</button>
+      <p class="fine">Ky është version demonstrues i portalit. Nuk keni llogari? <button class="link-btn" type="button" data-partner-apply>Aplikoni si partner</button></p>
+    </form>
+  </div>
+</dialog>
+
+<dialog class="dlg dlg--sm" id="partnerDlg" aria-labelledby="partnerTitle">
+  <div class="dlg__body" id="partnerBody">
+    <button class="dlg__close dlg__close--plain" type="button" data-close aria-label="Mbyll"><i data-i="x"></i></button>
+    <h2 id="partnerTitle">Bëhuni partner.</h2>
+    <p>Pas verifikimit të biznesit, ju dërgojmë qasjen në portal.</p>
+    <form class="dlg__form" id="partnerForm" novalidate>
+      <label class="field"><span>Emri i agjencisë</span><input class="input" name="agency" autocomplete="organization" required></label>
+      <label class="field"><span>Numri i biznesit (NUI ose NIPT)</span><input class="input" name="biz" required></label>
+      <label class="field"><span>Qyteti dhe shteti</span><input class="input" name="city" autocomplete="address-level2"></label>
+      <label class="field"><span>Personi kontaktues</span><input class="input" name="person" autocomplete="name" required></label>
+      <label class="field"><span>Email</span><input class="input" name="email" type="email" autocomplete="email" required></label>
+      <label class="field"><span>Telefoni</span><input class="input" name="phone" type="tel" autocomplete="tel" inputmode="tel" required></label>
+      <label class="check"><input type="checkbox" name="terms"><span>Pranoj që BCT Travel të më kontaktojë për bashkëpunim.</span></label>
+      <div class="form-actions">
+        <button class="pill pill--wa" type="submit" name="via" value="wa"><i data-i="whatsapp"></i>Dërgo me WhatsApp</button>
+        <button class="pill pill--soft" type="submit" name="via" value="mail"><i data-i="mail"></i>Dërgo me email</button>
+      </div>
+    </form>
+  </div>
+</dialog>
+
+<dialog class="dlg dlg--drawer" id="dashDlg" aria-labelledby="dashTitle">
+  <div class="drawer">
+    <button class="dlg__close dlg__close--plain" type="button" data-close aria-label="Mbyll"><i data-i="x"></i></button>
+    <div class="drawer__head">
+      <h2 id="dashTitle">Paneli i partnerit.</h2>
+      <p><span data-partner-name></span>: kërkesat, ofertat për klientët dhe markup-u.</p>
+      <div class="tabs" role="tablist" aria-label="Paneli">
+        <button type="button" role="tab" data-dtab="overview" aria-controls="dashBody" aria-selected="true">Përmbledhje</button>
+        <button type="button" role="tab" data-dtab="quote" aria-controls="dashBody" aria-selected="false">Ofertë për klientin</button>
+        <button type="button" role="tab" data-dtab="markup" aria-controls="dashBody" aria-selected="false">Markup</button>
+      </div>
+    </div>
+    <div class="drawer__body" id="dashBody" role="tabpanel" tabindex="-1"></div>
+  </div>
+</dialog>
+
+<script>
+{{DATA}}
+</script>
+<script>
+{{PHOTOS}}
+</script>
+<script>
+{{WORLD}}
+</script>
+<script>
+{{GLOBE}}
+</script>
+<script>
+{{APP}}
+</script>
+<script>
+{{CONTENT}}
+</script>
+</body>
+</html>

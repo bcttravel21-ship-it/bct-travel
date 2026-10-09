@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="sq">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Paneli i administrimit – BCT Travel</title>
+<link rel="icon" href="{{FAVICON}}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+{{CSS}}
+</style>
+</head>
+<body>
+<header class="top">
+  <img src="{{LOGO}}" alt="BCT Travel" class="top__logo">
+  <span class="top__title">Paneli i administrimit</span>
+  <button class="btn btn--ghost btn--sm" id="logout" type="button" hidden>Dil</button>
+</header>
+
+<main class="main">
+  <section class="login" id="login" hidden>
+    <form class="card login__card" id="loginForm">
+      <h1>Hyni në panel</h1>
+      <p class="muted">Këtu ndryshoni çmimet, datat, tekstet dhe fotot e ofertave. Ndryshimet dalin në faqe pasi t'i publikoni.</p>
+      <label class="fld" id="apiRow" hidden><span>Adresa e shërbimit 24/7</span><input class="in" id="apiInput" type="url" placeholder="https://bct-flights.EMRI.workers.dev" autocomplete="off"></label>
+      <label class="fld"><span>Fjalëkalimi</span><input class="in" id="pass" type="password" autocomplete="current-password" required></label>
+      <p class="err" id="loginErr" role="alert"></p>
+      <button class="btn btn--red btn--wide" id="loginBtn" type="submit">Hyr</button>
+      <button class="link" id="apiToggle" type="button">Adresa e shërbimit</button>
+    </form>
+  </section>
+
+  <section class="app" id="app" hidden>
+    <div class="head">
+      <div><h1>Ofertat</h1><p class="muted" id="lastSaved"></p></div>
+      <div class="stats">
+        <div><b id="statTotal">0</b><span>oferta</span></div>
+        <div><b id="statLive">0</b><span>në faqe</span></div>
+        <div><b id="statChanged">0</b><span>me ndryshime</span></div>
+      </div>
+    </div>
+    <div class="tools">
+      <input class="in in--search" id="search" type="search" placeholder="Kërko ofertën…" aria-label="Kërko ofertën">
+      <div class="seg" role="group" aria-label="Filtro ofertat">
+        <button type="button" data-filter="all" aria-pressed="true">Të gjitha</button>
+        <button type="button" data-filter="live" aria-pressed="false">Aktive</button>
+        <button type="button" data-filter="hidden" aria-pressed="false">Të fshehura</button>
+        <button type="button" data-filter="changed" aria-pressed="false">Të ndryshuara</button>
+      </div>
+    </div>
+    <div class="grid" id="list"></div>
+  </section>
+</main>
+
+<div class="savebar" id="saveBar" hidden>
+  <p id="saveInfo"></p>
+  <div class="savebar__btns"><button class="btn" id="discard" type="button">Anulo</button><button class="btn btn--red" id="publish" type="button">Publiko në faqe</button></div>
+</div>
+
+<dialog class="editor" id="editor" aria-labelledby="edTitle">
+  <div class="editor__head">
+    <div><h2 id="edTitle">Ndrysho ofertën</h2><p class="muted small" id="edId"></p></div>
+    <button class="icon-btn" id="edClose" type="button" aria-label="Mbyll">×</button>
+  </div>
+  <div class="editor__body">
+    <label class="switch"><input type="checkbox" id="fShow"><span class="switch__ui" aria-hidden="true"></span><span>Shfaqet në faqe</span></label>
+    <div class="cols">
+      <label class="fld"><span>Titulli</span><input class="in" id="fTitle"></label>
+      <label class="fld"><span>Etiketa, sipër titullit</span><input class="in" id="fTag" placeholder="p.sh. Vilë mbi ujë"></label>
+    </div>
+    <label class="fld"><span>Përshkrimi i shkurtër</span><textarea class="in" id="fSub" rows="2"></textarea></label>
+    <div class="cols cols--4">
+      <label class="fld"><span>Çmimi nga (€)</span><input class="in" id="fPrice" inputmode="decimal"></label>
+      <label class="fld"><span>Çmimi i vjetër (€)</span><input class="in" id="fOld" inputmode="decimal" placeholder="opsional" title="Shfaqet i vizatuar, me përqindjen e uljes"></label>
+      <label class="fld"><span>Netë</span><input class="in" id="fNights" type="number" min="1" max="60"></label>
+      <label class="fld"><span>Akomodimi</span><input class="in" id="fStay" placeholder="p.sh. Resort 5★"></label>
+    </div>
+    <label class="fld"><span>Ushqimi</span><input class="in" id="fMeal" placeholder="p.sh. All Inclusive"></label>
+    <p class="muted small">Nëse vendosni çmimin e vjetër, faqja e tregon të vizatuar dhe shkruan uljen, p.sh. "Ulje −14%". Për ofertat Early Booking shkruan "Early Booking −14%".</p>
+
+    <fieldset class="box">
+      <legend>Datat e nisjes</legend>
+      <p class="muted small">Oferta shfaqet në faqe vetëm nëse ka të paktën një datë në të ardhmen.</p>
+      <div id="dates"></div>
+      <button type="button" class="btn btn--sm" id="addDate">+ Shto datë</button>
+    </fieldset>
+
+    <fieldset class="box">
+      <legend>Fotoja</legend>
+      <div class="ph-grid">
+        <div class="ph-wrap"><div class="ph-pick" id="phPick" title="Klikoni ku është pjesa më e rëndësishme e fotos"><img id="phMain" alt="Fotoja e ofertës"><span class="ph-dot" id="phDot" aria-hidden="true"></span></div></div>
+        <div class="ph-side">
+          <p class="muted small">Si duket në faqe:</p>
+          <div class="ph-prevs"><div class="ph-prev ph-prev--tall"><img alt=""></div><div class="ph-prev ph-prev--wide"><img alt=""></div></div>
+          <label class="btn btn--dark btn--file">Ngarko foto nga kompjuteri<input type="file" id="phFile" accept="image/*" hidden></label>
+          <p class="muted small" id="phStatus">Klikoni mbi foto për të zgjedhur pjesën kryesore.</p>
+        </div>
+      </div>
+      <p class="muted small">Ose zgjidhni një nga fotot e gatshme:</p>
+      <div class="strip" id="photoStrip"></div>
+    </fieldset>
+
+    <label class="fld"><span>Pikat kryesore, një për rresht</span><textarea class="in" id="fHl" rows="4"></textarea></label>
+    <p class="err" id="edErr" role="alert"></p>
+  </div>
+  <div class="editor__foot">
+    <button class="btn btn--ghost" id="resetBtn" type="button">Rikthe origjinalin</button>
+    <span class="spacer"></span>
+    <button class="btn" id="edCancel" type="button">Anulo</button>
+    <button class="btn btn--red" id="edSave" type="button">Ruaj</button>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+{{DATA}}
+</script>
+<script>
+{{PHOTOS}}
+</script>
+<script>
+{{ADMIN}}
+</script>
+</body>
+</html>

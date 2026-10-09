@@ -1,0 +1,7 @@
+{
+  "name": "bct-flytik-bot",
+  "private": true,
+  "type": "module",
+  "scripts": { "start": "node bot.mjs" },
+  "dependencies": { "playwright": "^1.56.0" }
+}
