@@ -462,7 +462,6 @@ html:not([data-mode="b2b"]) .dtable .net { filter: blur(5px); }
 @media (max-width: 760px) { .footer__grid { grid-template-columns: 1fr 1fr; } .footer__brand { grid-column: 1 / -1; } }
 
 /* ============ Floating & toasts ============ */
-@media (max-width: 900px) { html.cfg-in-view .wa-fab { opacity: 0; pointer-events: none; transform: scale(.8); } }
 .wa-fab { transition: opacity .25s, transform .25s; }
 .wa-fab { position: fixed; right: 18px; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); z-index: 50; width: 54px; height: 54px; border-radius: 50%; background: var(--wa); color: #fff; display: grid; place-items: center; box-shadow: 0 14px 30px -12px rgba(0, 0, 0, .6); }
 .wa-fab .ic { width: 26px; height: 26px; }
@@ -721,7 +720,7 @@ dialog.dlg--drawer[open] { animation: drawer-in .28s cubic-bezier(.2, .8, .2, 1)
         <button type="button" data-mode-btn="b2b" aria-pressed="false">B2B</button>
       </div>
       <button type="button" class="nav-icon" data-fav-filter aria-label="Ofertat e ruajtura"><i data-i="heart"></i><span class="badge" data-fav-count></span></button>
-      <a class="pill pill--red pill--sm gnav__cta" href="#nderto">Rezervo</a>
+      <a class="pill pill--red pill--sm gnav__cta" href="#ofertat">Rezervo</a>
       <button type="button" class="nav-icon menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mnav" aria-label="Menyja"><i data-i="menu"></i></button>
     </div>
   </div>
@@ -748,7 +747,7 @@ dialog.dlg--drawer[open] { animation: drawer-in .28s cubic-bezier(.2, .8, .2, 1)
       <button type="button" data-mode-btn="b2c" aria-pressed="true">Udhëtarë</button>
       <button type="button" data-mode-btn="b2b" aria-pressed="false">Agjenci B2B</button>
     </div>
-    <a class="pill pill--red pill--block" href="#nderto">Rezervo udhëtimin</a>
+    <a class="pill pill--red pill--block" href="#ofertat">Rezervo udhëtimin</a>
   </div>
 </div>
 
@@ -786,20 +785,6 @@ dialog.dlg--drawer[open] { animation: drawer-in .28s cubic-bezier(.2, .8, .2, 1)
       </div>
       <div class="bento" id="bento"></div>
       <div class="bento-more"><button type="button" class="pill pill--soft" id="bentoMore" hidden></button></div>
-    </div>
-  </section>
-
-  <section class="sec" id="nderto" aria-labelledby="cfgTitle">
-    <div class="container">
-      <header class="sec__head">
-        <h2 id="cfgTitle">Ndërto udhëtimin tënd.</h2>
-        <p>Zgjidhni ofertën, datën, hotelin dhe udhëtarët. Çmimi llogaritet në çast, pa pritur ofertë me email.</p>
-      </header>
-      <div class="cfg">
-        <div class="cfg__steps" id="cfgSteps"></div>
-        <aside class="cfg__aside" aria-label="Përmbledhja e udhëtimit"><div class="cfg__sticky" id="cfgSummary"></div></aside>
-      </div>
-      <div class="cfg-bar" id="cfgBar"></div>
     </div>
   </section>
 
@@ -913,7 +898,7 @@ dialog.dlg--drawer[open] { animation: drawer-in .28s cubic-bezier(.2, .8, .2, 1)
       <header class="sec__head sec__head--center"><h2 id="faqTitle">Pyetje të shpeshta.</h2></header>
       <div class="faq">
         <details><summary>Çfarë përfshihet zakonisht në një paketë?</summary><p>Fluturimi kthyes (nga Prishtina, ose nga Tirana dhe Shkupi për Maldivet dhe Japoninë), transferet aeroport – hotel – aeroport, akomodimi me pensionin e zgjedhur dhe asistenca jonë. Te secila ofertë shihni saktësisht çfarë përfshihet dhe çfarë jo.</p></details>
-        <details><summary>Si rezervoj?</summary><p>Zgjidhni ofertën te “Ndërto udhëtimin”, caktoni datën, hotelin dhe udhëtarët, pastaj dërgoni kërkesën me WhatsApp ose me email. Ne ju konfirmojmë disponueshmërinë dhe çmimin përfundimtar.</p></details>
+        <details><summary>Si rezervoj?</summary><p>Te “Ofertat e sezonit” zgjidhni ofertën dhe shtypni “Rezervo”. Ju hapet WhatsApp-i me ofertën dhe datën e nisjes; shtoni sa udhëtarë jeni dhe na e dërgoni. Mund të na shkruani edhe me email ose nga forma e kontaktit. Ne ju konfirmojmë disponueshmërinë dhe çmimin përfundimtar.</p></details>
         <details><summary>A mund ta ndryshoj programin?</summary><p>Po. Data, hoteli, kohëzgjatja dhe aktivitetet mund të ndryshojnë. Për muaj mjalti dhe udhëtime private e ndërtojmë programin sipas jush.</p></details>
         <details><summary>Si paguhet?</summary><p>Rezervimi konfirmohet me një paradhënie dhe pjesa tjetër paguhet para nisjes. Kushtet e sakta për secilën ofertë jua japim me shkrim para pagesës.</p></details>
         <details><summary>A më ndihmoni me vizën?</summary><p>Po. Për çdo destinacion ju tregojmë nëse duhet vizë dhe ju ndihmojmë me dokumentet aty ku kërkohet.</p></details>
@@ -2166,7 +2151,7 @@ BCT.startApp = () => {
       <div class="chap__facts">${ch.facts.map(f => `<span>${f}</span>`).join('')}</div>
       ${ch.countdown ? '<p class="chap__count" data-countdown></p>' : ''}
       <p class="chap__price">${fromWord()}<b>${money(shownPrice(cheap))}</b>${cheap.old && !b2b() ? `<s>${money(cheap.old)}</s>` : ''}</p>
-      <div class="chap__cta"><button type="button" class="pill pill--white" data-details="${o.id}">Detajet</button>${alt ? `<button type="button" class="chev" data-details="${alt.id}">${ch.altLabel} ${ic('chevron')}</button>` : ''}<button type="button" class="chev" data-configure="${o.id}">Rezervo ${ic('chevron')}</button></div>
+      <div class="chap__cta"><button type="button" class="pill pill--white" data-details="${o.id}">Detajet</button>${alt ? `<button type="button" class="chev" data-details="${alt.id}">${ch.altLabel} ${ic('chevron')}</button>` : ''}<button type="button" class="chev" data-book="${o.id}">Rezervo ${ic('chevron')}</button></div>
     </div></div>`;
   }
   function holidayHtml(ch, i) {
@@ -2284,7 +2269,7 @@ BCT.startApp = () => {
       <h3 class="tile__title">${esc(o.title)}</h3>
       <p class="tile__sub">${nightsTxt(o.nights)}, ${esc(o.stay)}</p>
       <p class="tile__price">${price}</p>
-      <div class="tile__cta"><button type="button" class="pill pill--sm ${tone === 'd' ? 'pill--white' : 'pill--dark'}" data-details="${o.id}">Detajet</button><button type="button" class="chev" data-configure="${o.id}">Rezervo ${ic('chevron')}</button></div>
+      <div class="tile__cta"><button type="button" class="pill pill--sm ${tone === 'd' ? 'pill--white' : 'pill--dark'}" data-details="${o.id}">Detajet</button><button type="button" class="chev" data-book="${o.id}">Rezervo ${ic('chevron')}</button></div>
     </article>`;
   }
   function renderBento() {
@@ -2325,91 +2310,28 @@ BCT.startApp = () => {
   }
   function updateFavCount() { $$('[data-fav-count]').forEach(el => { el.textContent = state.favs.size ? String(state.favs.size) : ''; }); }
 
-  /* ---------- Configurator ---------- */
-  const C = { id: null, sel: {}, date: null, adults: 2, children: 0, sent: false };
-  const HINTS = { Vila: 'Ku dëshironi të zgjoheni?', Pensioni: 'Sa vakte të përfshira?', Transferi: 'Si arrini në ishull?', Safari: 'Sa ditë në savanë?', 'Plazhi në Zanzibar': 'Sa netë në oqean?', Niveli: 'Komfort apo luks?', Hoteli: 'Ku qëndroni?', Hotelet: 'Ku qëndroni?', 'Zona dhe hoteli': 'Cila zonë ju pëlqen?', Dhoma: 'Çfarë dhome dëshironi?', Resorti: 'Si dëshironi ta mbyllni udhëtimin?', Ekskursionet: 'Sa dëshironi të shihni?', Guleti: 'Sa ditë në det?', Akomodimi: 'Sa netë nën qiellin e hapur?', Aktivitetet: 'Sa aventurë dëshironi?', 'Kampi në Wadi Rum': 'Si dëshironi ta shihni qiellin?', Petra: 'Edhe natën?', Shtesë: 'Dëshironi të shihni më shumë?', 'Nata e Vitit të Ri': 'Si e prisni mesnatën?', 'Aktivitete shtesë': 'Diçka më shumë?' };
-  function cfgSelect(id, keepPax) {
+  /* ---------- Rezervimi: WhatsApp me ofertën; për agjencitë edhe kërkesë në panel ---------- */
+  function bookOffer(id) {
     const o = offerBy[id]; if (!o) return;
-    C.id = id; C.sel = defaults(o); C.sent = false;
-    const av = o.future.filter(x => x.s > 0); C.date = av[0] ? av[0].d : null;
-    if (!keepPax) { C.adults = 2; C.children = 0; }
-    renderCfg();
-  }
-  function renderCfg() { renderCfgSteps(); renderCfgSummary(); }
-  function renderCfgSteps() {
-    const o = offerBy[C.id];
-    const og = (label, arr) => arr.length ? `<optgroup label="${label}">${arr.map(x => `<option value="${x.id}"${x.id === C.id ? ' selected' : ''}>${esc(x.title)}, ${fromWord()} ${money(shownPrice(x))}</option>`).join('')}</optgroup>` : '';
-    const picks = `<span class="select select--lg"><select data-cfg-offer aria-label="Oferta">${og('Pushime', live().filter(x => !x.cats.includes('rare')))}${og('Koleksioni i rrallë', live().filter(x => x.cats.includes('rare')))}</select></span>`;
-    const dates = o.future.map(x => {
-      const low = x.s > 0 && x.s <= 5;
-      const sub = x.s === 0 ? 'Plot' : b2b() ? plural(x.s, 'vend', 'vende') : low ? `Vetëm ${plural(x.s, 'vend', 'vende')}` : 'Ka vende';
-      return `<button type="button" class="date-opt" data-pick-date="${x.d}" aria-pressed="${x.d === C.date}"${x.s === 0 ? ' disabled' : ''}><b>${fmtDate(x.d)}</b><small class="${low ? 'low' : ''}">${sub}${x.note ? `, ${esc(x.note)}` : ''}</small></button>`;
-    }).join('');
-    const opts = (o.options || []).map((g, gi) => `<div class="step"><h3 class="step__title">${esc(g.name)}. <span>${HINTS[g.name] || 'Zgjidhni sipas dëshirës.'}</span></h3><div class="opt-list">${g.choices.map((c, ci) => `<button type="button" class="opt" data-pick-opt="${gi}:${ci}" aria-pressed="${(C.sel[gi] || 0) === ci}"><span><b>${esc(c.l)}</b>${c.s ? `<small>${esc(c.s)}</small>` : ''}</span><span class="opt__delta">${c.d === 0 ? 'Përfshirë' : (c.d > 0 ? '+' : '−') + money(Math.abs(c.d))}</span></button>`).join('')}</div></div>`).join('');
-    const stepper = (key, label, sub, min, max, less, more) => `<div class="stepper"><div>${label}<small>${sub}</small></div><div class="stepper__ctrl"><button type="button" data-step="${key}:-1" aria-label="${less}"${C[key] <= min ? ' disabled' : ''}>${ic('minus')}</button><output>${C[key]}</output><button type="button" data-step="${key}:1" aria-label="${more}"${C[key] >= max ? ' disabled' : ''}>${ic('plus')}</button></div></div>`;
-    $('#cfgSteps').innerHTML = `
-      <div class="step"><h3 class="step__title">Oferta. <span>Cila ju tërheq më shumë?</span></h3>${picks}</div>
-      <div class="step"><h3 class="step__title">Data. <span>Kur dëshironi të niseni?</span></h3>${o.future.length ? `<div class="dates">${dates}</div>` : '<p class="muted">Na shkruani për datën që ju përshtatet.</p>'}</div>
-      ${opts}
-      <div class="step"><h3 class="step__title">Udhëtarët. <span>Kush vjen me ju?</span></h3><div>${stepper('adults', 'Të rritur', '12 vjeç e lart', 1, 8, 'Një i rritur më pak', 'Një i rritur më shumë')}${stepper('children', 'Fëmijë', `2–11 vjeç, −${Math.round((1 - o.child) * 100)}%`, 0, 4, 'Një fëmijë më pak', 'Një fëmijë më shumë')}</div></div>`;
-  }
-  function bookingText(o, q) {
-    return ['Përshëndetje BCT Travel, dëshiroj të rezervoj këtë ofertë:', '', o.title,
-      `Nisja: ${C.date ? span(C.date, q.nights) : 'data për t’u caktuar'}`, ...picksText(o, C.sel),
-      `Udhëtarë: ${paxText(C.adults, C.children)}`, `Çmimi i llogaritur: ${money(q.total)}`, '', 'Ju lutem më konfirmoni disponueshmërinë.'].join('\n');
-  }
-  function b2bText(o, q) {
-    return [`Kërkesë rezervimi B2B nga ${state.partner ? state.partner.agency : 'agjencia partnere'}`, '', o.title,
-      `Nisja: ${C.date ? span(C.date, q.nights) : 'data për t’u caktuar'}`, ...picksText(o, C.sel),
-      `Udhëtarë: ${paxText(C.adults, C.children)}`, `NET: ${money(q.net)} (komisioni ${money(q.commission)})`].join('\n');
-  }
-  function renderCfgSummary() {
-    const o = offerBy[C.id], q = quote(o, C.sel, C.adults, C.children);
-    const card = `<div class="sum-card ${moodFor(o)}">${photoLayer(o)}<p class="sum-card__route">${routeInline(o.route)}</p><h3 class="sum-card__title">${esc(o.title)}</h3><p class="sum-card__dates">${C.date ? span(C.date, q.nights) : 'Data sipas kërkesës'}, ${nightsTxt(q.nights)}</p>${o.plan ? timelineHtml(o, C.sel) : ''}</div>`;
-    let rows, cta, ctaShort;
+    const q = quote(o, defaults(o), 2, 0), date = o.next ? fmtDate(o.next.d) : 'data për t’u caktuar';
+    let text;
     if (b2b()) {
-      rows = `<div class="sum-row sum-row--muted"><span>Çmimi publik</span><span>${money(q.total)}</span></div><div class="sum-row"><span>Komisioni juaj (${Math.round(o.commission * 100)}%)</span><span>${money(q.commission)}</span></div><div class="sum-row sum-row--muted"><span>Me markup-un tuaj (+${state.markup}%)</span><span>${money(q.client)}</span></div><div class="sum-total"><span>NET gjithsej</span><b>${money(q.net)}</b></div>`;
-      cta = `${C.sent ? `<p class="done">${ic('check')}<span>Kërkesa u shtua në panel me statusin “Në pritje”.</span></p>` : ''}<button type="button" class="pill pill--red pill--block" data-b2b-request${C.date ? '' : ' disabled'}>Dërgo kërkesë rezervimi</button><button type="button" class="pill pill--soft pill--block" data-b2b-quote>Krijo ofertë për klientin</button><a class="pill pill--wa pill--block" href="${waHref(b2bText(o, q))}" target="_blank" rel="noopener">${ic('whatsapp')}Konfirmo me WhatsApp</a>`;
-      ctaShort = `<button type="button" class="pill pill--red pill--block" data-b2b-request${C.date ? '' : ' disabled'}>Dërgo kërkesë rezervimi</button>`;
+      state.requests.unshift({ id: o.id, title: o.title, date: o.next ? o.next.d : null, nights: q.nights, pax: paxText(2, 0), net: q.net, commission: q.commission });
+      renderDevice();
+      toast('Kërkesa u shtua në panel');
+      text = [`Përshëndetje BCT Travel, kërkesë rezervimi nga agjencia ${state.partner ? state.partner.agency : ''}:`, '',
+        `Oferta: ${o.title}`, `Nisja: ${date}, ${nightsTxt(q.nights)}`, 'Udhëtarë: __ të rritur, __ fëmijë', `NET nga ${money(netOf(o))} për person`].join('\n');
     } else {
-      const lines = [[`${plural(C.adults, 'i rritur', 'të rritur')} × ${money(q.adultUnit)}`, money(C.adults * q.adultUnit)]];
-      if (C.children) lines.push([`${plural(C.children, 'fëmijë', 'fëmijë')} × ${money(q.childUnit)}`, money(C.children * q.childUnit)]);
-      if (q.single) lines.push(['Shtesë për dhomë teke', money(q.single)]);
-      rows = lines.map(([a, b]) => `<div class="sum-row"><span>${a}</span><span>${b}</span></div>`).join('') + `<div class="sum-total"><span>Gjithsej</span><b>${money(q.total)}</b></div>`;
-      const text = bookingText(o, q);
-      cta = `<a class="pill pill--wa pill--block" href="${waHref(text)}" target="_blank" rel="noopener">${ic('whatsapp')}Rezervo me WhatsApp</a><a class="pill pill--soft pill--block" href="${mailHref('Rezervim: ' + o.title, text)}">${ic('mail')}Dërgo kërkesën me email</a><p class="fine">Nuk paguani asgjë tani. Ne ju konfirmojmë disponueshmërinë dhe çmimin përfundimtar.</p>`;
-      ctaShort = `<a class="pill pill--wa pill--block" href="${waHref(text)}" target="_blank" rel="noopener">${ic('whatsapp')}Rezervo me WhatsApp</a>`;
+      text = [`Përshëndetje BCT Travel, dua të rezervoj ofertën “${o.title}”.`, '',
+        `Nisja: ${date}, ${nightsTxt(q.nights)}`, `Çmimi në faqe: nga ${money(o.price)} për person`, 'Udhëtarë: __ të rritur, __ fëmijë', '',
+        'Ju lutem më konfirmoni disponueshmërinë dhe çmimin përfundimtar.'].join('\n');
     }
-    $('#cfgSummary').innerHTML = card + `<div class="sum-box">${rows}</div><div class="sum-cta">${cta}</div>`;
-    fixPos($('#cfgSummary'));
-    sizeTimeline($('#cfgSummary'));
-    $('#cfgBar').innerHTML = `<div class="sum-total"><span>${b2b() ? 'NET gjithsej' : 'Gjithsej'}<small class="fine fine--block"></small></span><b>${money(b2b() ? q.net : q.total)}</b></div>${ctaShort}`;
-    const sm = $('#cfgBar small'); if (sm) sm.textContent = paxText(C.adults, C.children);
-  }
-  function initCfg() {
-    $('#cfgSteps').addEventListener('change', e => { if (e.target.matches('[data-cfg-offer]')) { cfgSelect(e.target.value, true); const sel = $('#cfgSteps [data-cfg-offer]'); if (sel) sel.focus({ preventScroll: true }); } });
-    cfgSelect(live()[0].id);
-    $('#nderto').addEventListener('click', e => {
-      const t = e.target.closest('[data-pick-offer],[data-pick-date],[data-pick-opt],[data-step],[data-b2b-request],[data-b2b-quote]');
-      if (!t) return;
-      if (t.dataset.pickOffer) { cfgSelect(t.dataset.pickOffer, true); refocus($('#cfgSteps'), 'data-pick-offer', C.id); }
-      else if (t.dataset.pickDate) { C.date = t.dataset.pickDate; renderCfg(); refocus($('#cfgSteps'), 'data-pick-date', C.date); }
-      else if (t.dataset.pickOpt) { const [g, c] = t.dataset.pickOpt.split(':').map(Number); C.sel[g] = c; renderCfg(); refocus($('#cfgSteps'), 'data-pick-opt', t.dataset.pickOpt); }
-      else if (t.dataset.step) {
-        const [k, d] = t.dataset.step.split(':'), lim = k === 'adults' ? [1, 8] : [0, 4], v = t.dataset.step;
-        C[k] = Math.min(lim[1], Math.max(lim[0], C[k] + Number(d))); renderCfg(); refocus($('#cfgSteps'), 'data-step', v);
-      } else if (t.hasAttribute('data-b2b-request')) addRequest();
-      else if (t.hasAttribute('data-b2b-quote')) openDash('quote', { id: C.id, date: C.date, adults: C.adults, children: C.children, sel: Object.assign({}, C.sel) });
-    });
-  }
-  function addRequest() {
-    const o = offerBy[C.id], q = quote(o, C.sel, C.adults, C.children);
-    state.requests.unshift({ id: o.id, title: o.title, date: C.date, nights: q.nights, pax: paxText(C.adults, C.children), net: q.net, commission: q.commission });
-    C.sent = true; renderCfgSummary(); renderDevice(); toast('Kërkesa u shtua në panel');
+    launch(waHref(text), 'wa');
   }
 
   /* ---------- Details sheet ---------- */
   function openDetails(id) {
+    state.sheetId = id;
     const o = offerBy[id]; if (!o) return;
     const sel = defaults(o), q = quote(o, sel, 2, 0), d = destBy[o.dest];
     $('#sheetHero').className = `sheet__hero ${moodFor(o)}`;
@@ -2433,7 +2355,7 @@ BCT.startApp = () => {
       ${o.note ? `<p class="note">${esc(o.note)}</p>` : ''}`;
     sizeTimeline($('#sheetBody'));
     const ask = `Përshëndetje BCT Travel, kam një pyetje për ofertën “${o.title}”.`;
-    $('#sheetFoot').innerHTML = `<div><small>${fromWord()}, për person</small><b>${money(shownPrice(o))}</b></div><div><a class="pill pill--soft" href="${waHref(ask)}" target="_blank" rel="noopener">${ic('whatsapp')}Pyet në WhatsApp</a><button type="button" class="pill pill--red" data-configure="${o.id}">Rezervo këtë ofertë</button></div>`;
+    $('#sheetFoot').innerHTML = `<div><small>${fromWord()}, për person</small><b>${money(shownPrice(o))}</b></div><div><a class="pill pill--soft" href="${waHref(ask)}" target="_blank" rel="noopener">${ic('whatsapp')}Pyet në WhatsApp</a><button type="button" class="pill pill--red" data-book="${o.id}">Rezervo këtë ofertë</button></div>`;
     showDialog($('#offerDlg'));
     $('#sheetScroll').scrollTop = 0;
   }
@@ -2619,8 +2541,8 @@ BCT.startApp = () => {
     store.set('mode', m);
     $$('[data-mode-btn]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.modeBtn === m)));
     $$('[data-partner-name]').forEach(el => { el.textContent = state.partner ? state.partner.agency : ''; });
-    renderBento(); renderCfg(); renderRare(); renderDevice(); renderPanels(); updateGlobeLabels();
-    if ($('#offerDlg').open && $('#sheetFoot [data-configure]')) openDetails($('#sheetFoot [data-configure]').dataset.configure);
+    renderBento(); renderRare(); renderDevice(); renderPanels(); updateGlobeLabels();
+    if ($('#offerDlg').open && state.sheetId) openDetails(state.sheetId);
   }
   function agencyFrom(email) {
     const dom = (email.split('@')[1] || '').split('.')[0];
@@ -2654,7 +2576,7 @@ BCT.startApp = () => {
       const R = state.requests, net = R.reduce((a, r) => a + r.net, 0), com = R.reduce((a, r) => a + r.commission, 0);
       const deps = allDeps.filter(x => x.s > 0).slice(0, 6);
       body.innerHTML = `<div class="metrics"><div class="metric"><small>Kërkesa të dërguara</small><b>${R.length}</b></div><div class="metric"><small>Vlera NET</small><b>${money(net)}</b></div><div class="metric"><small>Komisioni i pritshëm</small><b>${money(com)}</b></div></div>
-        <div><h3 class="drawer__h">Kërkesat e mia</h3>${R.length ? `<ul class="req-list">${R.map(r => `<li class="req"><div class="req__top"><b>${esc(r.title)}</b><span class="req__status">Në pritje</span></div><small>${r.date ? span(r.date, r.nights) : 'Pa datë'}, ${esc(r.pax)}</small><small>NET ${money(r.net)}, komisioni ${money(r.commission)}</small></li>`).join('')}</ul>` : '<p class="empty-note">Ende nuk keni dërguar kërkesa. Zgjidhni një ofertë te “Ndërto udhëtimin” dhe shtypni “Dërgo kërkesë rezervimi”.</p>'}</div>
+        <div><h3 class="drawer__h">Kërkesat e mia</h3>${R.length ? `<ul class="req-list">${R.map(r => `<li class="req"><div class="req__top"><b>${esc(r.title)}</b><span class="req__status">Në pritje</span></div><small>${r.date ? span(r.date, r.nights) : 'Pa datë'}, ${esc(r.pax)}</small><small>NET ${money(r.net)}, komisioni ${money(r.commission)}</small></li>`).join('')}</ul>` : '<p class="empty-note">Ende nuk keni dërguar kërkesa. Te “Ofertat e sezonit” shtypni “Rezervo” te oferta që ju intereson.</p>'}</div>
         <div><h3 class="drawer__h">Nisjet e ardhshme me vende të lira</h3><ul class="dep-list">${deps.map(x => `<li><span><b>${esc(x.o.title)}</b><small>${fmtD(x.date)}, ${plural(x.s, 'vend i lirë', 'vende të lira')}, NET ${money(netOf(x.o))}</small></span><button type="button" class="pill pill--soft pill--sm" data-dash-open="${x.o.id}" data-date="${x.d}">Zgjidh</button></li>`).join('')}</ul></div>`;
     } else if (D.tab === 'quote') {
       const q = D.q, o = offerBy[q.id];
@@ -2701,10 +2623,10 @@ BCT.startApp = () => {
       if (!t) return;
       if (t.dataset.dtab) { D.tab = t.dataset.dtab; renderDash(); t.focus(); }
       else if (t.hasAttribute('data-copy-quote')) toast(await copyText(D.text) ? 'Teksti i ofertës u kopjua' : 'Kopjimi nuk u lejua. Zgjidhni tekstin dhe kopjojeni me dorë.');
-      else if (t.dataset.dashOpen) { closeDialog(dlg); cfgSelect(t.dataset.dashOpen, true); C.date = t.dataset.date; renderCfg(); scrollToId('nderto'); }
+      else if (t.dataset.dashOpen) { closeDialog(dlg); openDetails(t.dataset.dashOpen); }
     });
     dlg.addEventListener('input', e => {
-      if (e.target.id === 'mkRange') { state.markup = +e.target.value; store.set('markup', state.markup); $('#mkOut').textContent = state.markup + '%'; renderMarkupExample(); renderCfgSummary(); return; }
+      if (e.target.id === 'mkRange') { state.markup = +e.target.value; store.set('markup', state.markup); $('#mkOut').textContent = state.markup + '%'; renderMarkupExample(); return; }
       if (!e.target.closest('#quoteForm')) return;
       const q = D.q, name = e.target.name;
       if (name === 'offer') { const o = offerBy[e.target.value]; q.id = o.id; q.date = o.next.d; q.sel = defaults(o); renderDash(); return; }
@@ -2803,11 +2725,11 @@ BCT.startApp = () => {
   }
   function initGlobal() {
     document.addEventListener('click', e => {
-      const t = e.target.closest('[data-fav],[data-details],[data-configure],[data-login],[data-partner-apply],[data-open-dash],[data-logout],[data-goto-cat],[data-close],[data-mode-btn],[data-fav-filter],[data-clear],[data-reset]');
+      const t = e.target.closest('[data-fav],[data-details],[data-book],[data-login],[data-partner-apply],[data-open-dash],[data-logout],[data-goto-cat],[data-close],[data-mode-btn],[data-fav-filter],[data-clear],[data-reset]');
       if (!t) return;
       if (t.dataset.fav) toggleFav(t.dataset.fav);
       else if (t.dataset.details) openDetails(t.dataset.details);
-      else if (t.dataset.configure) { $$('dialog[open]').forEach(closeDialog); cfgSelect(t.dataset.configure, true); scrollToId('nderto'); }
+      else if (t.dataset.book) bookOffer(t.dataset.book);
       else if (t.hasAttribute('data-login')) showDialog($('#loginDlg'));
       else if (t.hasAttribute('data-partner-apply')) { closeDialog($('#loginDlg')); if (!$('#partnerForm')) $('#partnerBody').innerHTML = partnerTpl; showDialog($('#partnerDlg')); }
       else if (t.hasAttribute('data-open-dash')) openDash(t.dataset.openDash || 'overview');
@@ -2823,18 +2745,14 @@ BCT.startApp = () => {
 
   function init() {
     injectIcons();
-    initContacts(); initDialogs(); initMenu(); initBento(); initCfg(); initLogin(); initDash(); initForms(); initGlobal();
+    initContacts(); initDialogs(); initMenu(); initBento(); initLogin(); initDash(); initForms(); initGlobal();
     initFlights(); renderRare(); initCarousel(); renderDevice(); initDeviceTilt(); updateFavCount();
     state.mode = state.partner && store.get('mode', 'b2c') === 'b2b' ? 'b2b' : 'b2c';
     document.documentElement.dataset.mode = state.mode;
     $$('[data-mode-btn]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.modeBtn === state.mode)));
     $$('[data-partner-name]').forEach(el => { el.textContent = state.partner ? state.partner.agency : ''; });
-    renderBento(); renderCfg(); renderRare(); renderDevice();
+    renderBento(); renderRare(); renderDevice();
     initStage();
-    const cfgSec = $('#nderto');
-    if (cfgSec && 'IntersectionObserver' in window) {
-      new IntersectionObserver(es => es.forEach(en => document.documentElement.classList.toggle('cfg-in-view', en.isIntersecting)), { rootMargin: '-30% 0px -10% 0px' }).observe(cfgSec);
-    }
   }
   init();
 };
